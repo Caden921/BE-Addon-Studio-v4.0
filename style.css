@@ -218,6 +218,10 @@ button:hover{
 
 footer{
 
+    width:min(100%,950px);
+
+    margin:0 auto;
+
     text-align:center;
 
     padding:40px 20px;

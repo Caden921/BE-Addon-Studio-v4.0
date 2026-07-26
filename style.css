@@ -212,3 +212,36 @@ button:hover{
     font-size:14px;
 
 }
+/* =========================
+   Footer
+========================= */
+
+footer{
+
+    text-align:center;
+
+    padding:40px 20px;
+
+    color:var(--sub);
+
+}
+
+footer h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+footer p{
+
+    margin-bottom:8px;
+
+}
+
+footer small{
+
+    color:var(--sub);
+
+}

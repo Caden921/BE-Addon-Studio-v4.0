@@ -48,10 +48,16 @@ value="${item.name}">
 
 <label>Identifier</label>
 
-<input
-type="text"
-class="identifier"
-value="${item.identifier}">
+<div class="identifierBox">
+
+    <span>beas:</span>
+
+    <input
+    type="text"
+    class="identifier"
+    value="${item.identifier}">
+
+</div>
 
 <label>Max Stack Size</label>
 

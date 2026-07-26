@@ -158,6 +158,52 @@ for (const item of project.items) {
             "manifest.json",
             JSON.stringify(rpManifest, null, 4)
         );
+        // -----------------------------
+// Textures
+// -----------------------------
+
+const texturesFolder = rp.folder("textures");
+const itemsTextureFolder = texturesFolder.folder("items");
+
+const textureData = {};
+
+for (const item of project.items) {
+
+    if (item.texture) {
+
+        itemsTextureFolder.file(
+
+            item.identifier + ".png",
+
+            item.texture
+
+        );
+
+    }
+
+    textureData[item.identifier] = {
+
+        textures: "textures/items/" + item.identifier
+
+    };
+
+}
+
+rp.file(
+
+    "textures/item_texture.json",
+
+    JSON.stringify({
+
+        resource_pack_name: project.pack.name,
+
+        texture_name: "atlas.items",
+
+        texture_data: textureData
+
+    }, null, 4)
+
+);
 
         // Pack Icon
 

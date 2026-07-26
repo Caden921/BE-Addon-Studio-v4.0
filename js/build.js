@@ -3,13 +3,13 @@
 // build.js
 // ===================================================
 
-const buildButton=document.getElementById("buildButton");
+const buildButton = document.getElementById("buildButton");
 
-buildButton.addEventListener("click",buildAddon);
+buildButton.addEventListener("click", buildAddon);
 
-async function buildAddon(){
+async function buildAddon() {
 
-    if(!project.pack.name.trim()){
+    if (!project.pack.name.trim()) {
 
         alert("Pack Name을 입력해주세요.");
 
@@ -17,74 +17,189 @@ async function buildAddon(){
 
     }
 
-    const bp=new JSZip();
+    buildButton.disabled = true;
+    buildButton.textContent = "Building...";
 
-    bp.file("manifest.json",JSON.stringify({
+    try {
 
-        format_version:2,
+        // -----------------------------
+        // Behavior Pack
+        // -----------------------------
 
-        header:{
-            name:project.pack.name,
-            description:project.pack.description,
-            uuid:crypto.randomUUID(),
-            version:[1,0,0],
-            min_engine_version:[1,21,0]
-        },
+        const bp = new JSZip();
 
-        modules:[{
+        const bpManifest = {
 
-            type:"script",
-            language:"javascript",
-            uuid:crypto.randomUUID(),
-            version:[1,0,0],
-            entry:"scripts/main.js"
+            format_version: 2,
 
-        }]
+            header: {
 
-    },null,4));
+                name: project.pack.name,
 
-    bp.folder("scripts").file("main.js","");
+                description: project.pack.description || "",
 
-    const rp=new JSZip();
+                uuid: crypto.randomUUID(),
 
-    rp.file("manifest.json",JSON.stringify({
+                version: [1, 0, 0],
 
-        format_version:2,
+                min_engine_version: [1, 21, 0]
 
-        header:{
-            name:project.pack.name+" RP",
-            description:project.pack.description,
-            uuid:crypto.randomUUID(),
-            version:[1,0,0],
-            min_engine_version:[1,21,0]
-        },
+            },
 
-        modules:[{
+            modules: [
 
-            type:"resources",
-            uuid:crypto.randomUUID(),
-            version:[1,0,0]
+                {
 
-        }]
+                    type: "script",
 
-    },null,4));
+                    language: "javascript",
 
-    const bpBlob=await bp.generateAsync({type:"blob"});
-    const rpBlob=await rp.generateAsync({type:"blob"});
+                    uuid: crypto.randomUUID(),
 
-    const addon=new JSZip();
+                    version: [1, 0, 0],
 
-    addon.file("behavior_pack.mcpack",bpBlob);
-    addon.file("resource_pack.mcpack",rpBlob);
+                    entry: "scripts/main.js"
 
-    const blob=await addon.generateAsync({type:"blob"});
+                }
 
-    const a=document.createElement("a");
+            ]
 
-    a.href=URL.createObjectURL(blob);
-    a.download=project.pack.name+".mcaddon";
-    a.click();
+        };
 
-    URL.revokeObjectURL(a.href);
+        bp.file(
+            "manifest.json",
+            JSON.stringify(bpManifest, null, 4)
+        );
+
+        bp.folder("scripts").file("main.js", "");
+
+        // -----------------------------
+        // Resource Pack
+        // -----------------------------
+
+        const rp = new JSZip();
+
+        const rpManifest = {
+
+            format_version: 2,
+
+            header: {
+
+                name: project.pack.name + " RP",
+
+                description: project.pack.description || "",
+
+                uuid: crypto.randomUUID(),
+
+                version: [1, 0, 0],
+
+                min_engine_version: [1, 21, 0]
+
+            },
+
+            modules: [
+
+                {
+
+                    type: "resources",
+
+                    uuid: crypto.randomUUID(),
+
+                    version: [1, 0, 0]
+
+                }
+
+            ]
+
+        };
+
+        rp.file(
+            "manifest.json",
+            JSON.stringify(rpManifest, null, 4)
+        );
+
+        // Pack Icon
+
+        if (project.pack.icon) {
+
+            bp.file("pack_icon.png", project.pack.icon);
+
+            rp.file("pack_icon.png", project.pack.icon);
+
+        }
+
+        // -----------------------------
+        // Generate MCPACKs
+        // -----------------------------
+
+        const bpBlob = await bp.generateAsync({
+
+            type: "blob",
+
+            compression: "DEFLATE"
+
+        });
+
+        const rpBlob = await rp.generateAsync({
+
+            type: "blob",
+
+            compression: "DEFLATE"
+
+        });
+
+        // -----------------------------
+        // Generate MCADDON
+        // -----------------------------
+
+        const addon = new JSZip();
+
+        addon.file("behavior_pack.mcpack", bpBlob);
+
+        addon.file("resource_pack.mcpack", rpBlob);
+
+        const addonBlob = await addon.generateAsync({
+
+            type: "blob",
+
+            compression: "DEFLATE"
+
+        });
+
+        const url = URL.createObjectURL(addonBlob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+
+        a.download = project.pack.name + ".mcaddon";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+        URL.revokeObjectURL(url);
+
+        alert("MCADDON 생성 완료!");
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        alert("빌드 실패\n\n" + err);
+
+    }
+
+    finally {
+
+        buildButton.disabled = false;
+
+        buildButton.textContent = "Build MCADDON";
+
+    }
 
 }

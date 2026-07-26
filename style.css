@@ -421,3 +421,46 @@ footer small{
     }
 
 }
+.identifierBox{
+
+    display:flex;
+
+    align-items:center;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+.identifierBox span{
+
+    padding:12px 14px;
+
+    background:var(--card2);
+
+    color:var(--sub);
+
+    border-right:1px solid var(--border);
+
+    font-family:monospace;
+
+}
+
+.identifierBox input{
+
+    border:none;
+
+    border-radius:0;
+
+    flex:1;
+
+}
+
+.identifierBox input:focus{
+
+    outline:none;
+
+}

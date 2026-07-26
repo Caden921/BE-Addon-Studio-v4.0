@@ -214,6 +214,30 @@ rp.file(
             rp.file("pack_icon.png", project.pack.icon);
 
         }
+        
+        // -----------------------------
+// Language files
+// -----------------------------
+
+const textsFolder = rp.folder("texts");
+
+textsFolder.file(
+    "languages.json",
+    JSON.stringify(["en_US"], null, 4)
+);
+
+let lang = "";
+
+for (const item of project.items) {
+
+    lang += `item.beas:${item.identifier}.name=${item.name}\n`;
+
+}
+
+textsFolder.file(
+    "en_US.lang",
+    lang
+);
 
         // -----------------------------
         // Generate MCPACKs

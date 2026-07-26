@@ -72,6 +72,47 @@ async function buildAddon() {
         );
 
         bp.folder("scripts").file("main.js", "");
+        // -----------------------------
+// Items
+// -----------------------------
+
+const itemsFolder = bp.folder("items");
+
+for (const item of project.items) {
+
+    const itemJson = {
+
+        format_version: "1.21.0",
+
+        "minecraft:item": {
+
+            description: {
+
+                identifier: `beas:${item.identifier}`
+
+            },
+
+            components: {
+
+                "minecraft:icon": item.identifier,
+
+                "minecraft:max_stack_size": item.stack
+
+            }
+
+        }
+
+    };
+
+    itemsFolder.file(
+
+        item.identifier + ".json",
+
+        JSON.stringify(itemJson, null, 4)
+
+    );
+
+}
 
         // -----------------------------
         // Resource Pack

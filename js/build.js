@@ -219,7 +219,7 @@ let lang = "";
 
 for (const item of project.items) {
 
-    lang += `item.beas:${item.identifier}.name=${item.name}\n`;
+    lang += `item.beas:${item.identifier}=${item.name}\n`;
 
 }
 

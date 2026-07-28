@@ -71,7 +71,6 @@ async function buildAddon() {
             JSON.stringify(bpManifest, null, 4)
         );
 
-        bp.folder("scripts").file("main.js", "");
         // -----------------------------
 // Items
 // -----------------------------

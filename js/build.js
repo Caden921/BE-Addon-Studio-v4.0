@@ -160,13 +160,12 @@ for (const item of project.items) {
 
     if (item.texture) {
 
-        itemsTextureFolder.file(
+const buffer = await item.texture.arrayBuffer();
 
-            item.identifier + ".png",
-
-            item.texture
-
-        );
+itemsTextureFolder.file(
+    item.identifier + ".png",
+    buffer
+);
 
     }
 

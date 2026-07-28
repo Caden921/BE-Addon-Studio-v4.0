@@ -11,7 +11,7 @@ Let’s get straight to the point. I don't know about cording, but I made a Mine
 It's not perfect yet, but it's getting better.
 Maybe, it will works IOS and IPadOS. Other than this.. I have no idea.
 So, Thank you for reading!
-(English is not my native language. so, We ask for your understanding.)
+(English is not my first language, so please bear with me.)
 
 ## ✨ Features
 

@@ -13,6 +13,8 @@ Maybe, it will works IOS and IPadOS. Other than this.. I have no idea.
 So, Thank you for reading!
 (English is not my first language, so please bear with me.)
 
+---
+
 ## ✨ Features
 
 ### Current

@@ -46,23 +46,13 @@ async function buildAddon() {
 
             },
 
-            modules: [
-
-                {
-
-                    type: "script",
-
-                    language: "javascript",
-
-                    uuid: crypto.randomUUID(),
-
-                    version: [1, 0, 0],
-
-                    entry: "scripts/main.js"
-
-                }
-
-            ]
+modules: [
+    {
+        type: "data",
+        uuid: crypto.randomUUID(),
+        version: [1, 0, 0]
+    }
+]
 
         };
 

@@ -6,7 +6,7 @@ BE Addon Studio is a web-based tool for creating Minecraft Bedrock Edition Add-o
 
 ## 👋 Hellow! (written by me)
 
-Hello! everyone. I'm live in Korea(not north), and I'm middle school student.
+Hello! everyone. I live in Korea(not north), and I'm middle school student.
 Let’s get straight to the point. I don't know about cording, but I made a Minecraft BE Addon maker. With ChatGPT!(Thank you! Open AI.)
 It's not perfect yet, but it's getting better.
 It will work at IOS and IPadOS. Other than this.. I have no idea.🤔 (I don't have device that uses other OS.)

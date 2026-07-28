@@ -104,7 +104,7 @@ MIT License
 
 ## 👨‍💻 Developer
 
-Developed by **Junseong Kim**
+Developed by **Junseong Kim or Caden Kim**
 
 Powered by **OpenAI ChatGPT**
 
